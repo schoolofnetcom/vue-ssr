@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <minha-ancora id="ancora" url="http://schoolofnet.com">School of Net <i>Meu icone</i></minha-ancora>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        components: {
+            'minha-ancora': {
+                props: ['id', 'url'],
+                render: function(createElement){
+                    return createElement('a', {
+                        attrs: {
+                            id: this.id,
+                            href: this.url
+                        }
+                    }, this.$slots.default);
+                }
+            }
+        }
+        /*render: function (createElement) {
+            return createElement('div',{
+                attrs: {id: 'hello-world', 'class': 'teste'},
+                style: {color: 'red'},
+                domProps: {
+                    innerHTML: 'Hello World!<p>Meu parágrafo</p>'
+                }
+            });
+        }*/
+    })
+</script>
+</body>
+</html>

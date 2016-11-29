@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+
+    var inputComponent = {
+        render: function(createElement){
+            return createElement('input', {
+                attrs: {
+                    type: 'text',
+                },
+                on: {
+                    keyup: this.meuKeyup
+                }
+            });
+        },
+        methods: {
+            meuKeyup: function(){
+                console.log('keyup disparado');
+            }
+        }
+    };
+
+    var minhaAncoraComponent = {
+        props: ['id', 'url'],
+        render: function(createElement){
+            return createElement('a', {
+                'class': {
+                    teste: true,
+                    'outra-class': true
+                },
+                attrs: {
+                    id: this.id,
+                    href: this.url
+                },
+                on: {
+                    click: this.meuClique
+                }
+            }, this.$slots.default);
+        },
+        methods: {
+            meuClique: function(event){
+                event.preventDefault();
+                alert('clique funcionando');
+            }
+        }
+    };
+
+    new Vue({
+        el: '#app',
+        render: function (createElement) {
+            return createElement('div', [
+                createElement(minhaAncoraComponent, {
+                    attrs: {url: 'http://schoolofnet.com', id: 'ancora'},
+                }, [
+                    'School of Net ',
+                    createElement('i', 'Meu icone')
+                ]),
+                createElement('br'),
+                createElement(inputComponent)
+            ]);
+        }
+    })
+</script>
+</body>
+</html>
